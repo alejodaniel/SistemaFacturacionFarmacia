@@ -20,6 +20,12 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idProducto;
 
+    @Column(nullable = false, columnDefinition = "varchar(30)")
+    private String codigo;
+
+    @Column(nullable = false, columnDefinition = "varchar(20)")
+    private String codigoBarras;
+
     @Column(nullable = false, columnDefinition = "varchar(50)")
     private String nombre;
 
@@ -28,6 +34,12 @@ public class Producto implements Serializable {
 
     @Column(nullable = false, columnDefinition = "varchar(50)")
     private String stock;
+
+    @Column(nullable = false, columnDefinition = "varchar(30)")
+    private String costo;
+
+    @Column(nullable = false, columnDefinition = "varchar(20)")
+    private String stockMinimo;
 
     @ManyToOne
     private Empresa empresa;
@@ -117,6 +129,62 @@ public class Producto implements Serializable {
      */
     public void setItemFacturas(List<ItemFactura> itemFacturas) {
         this.itemFacturas = itemFacturas;
+    }
+
+    /**
+     * @return the costo
+     */
+    public String getCosto() {
+        return costo;
+    }
+
+    /**
+     * @param costo the costo to set
+     */
+    public void setCosto(String costo) {
+        this.costo = costo;
+    }
+
+    /**
+     * @return the stockMinimo
+     */
+    public String getStockMinimo() {
+        return stockMinimo;
+    }
+
+    /**
+     * @param stockMinimo the stockMinimo to set
+     */
+    public void setStockMinimo(String stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+    /**
+     * @return the codigo
+     */
+    public String getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * @param codigo the codigo to set
+     */
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    /**
+     * @return the codigoBarras
+     */
+    public String getCodigoBarras() {
+        return codigoBarras;
+    }
+
+    /**
+     * @param codigoBarras the codigoBarras to set
+     */
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
     }
 
 }

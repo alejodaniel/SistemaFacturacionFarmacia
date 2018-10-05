@@ -30,7 +30,7 @@ import javax.swing.UIManager;
  * @author Alejandro
  */
 public class PrincipalView extends javax.swing.JDialog implements Runnable {
-
+    
     public Image imagenFondo;
     public URL fondo;
     Usuario usuario;
@@ -41,56 +41,32 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
     Thread h1;
     boolean activo = true;
     int cont = 0;
-
+    
     public PrincipalView(java.awt.Frame parent, boolean modal, Usuario user) {
         super(parent, modal);
         initComponents();
+        
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/menu.png")).getImage());
         h1 = new Thread(this);
         this.setLocationRelativeTo(null);
-
+        
         h1.start();
-        cerrar();
+        
         if (user != null) {
             usuario = user;
         }
 
-//        System.out.println(usuario.getEmpleado().getNombre());
+        //System.out.println(usuario.getEmpleado().getNombre());
         cargarUsuario();
+        cerrar();
     }
-
+    
     public void cargarUsuario() {
         if (usuario != null) {
             txtobtenernombre.setText(usuario.getEmpleado().getNombre());
         }
     }
-
-    public void cerrar() {
-        try {
-            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-            addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent e) {
-                    confirmarSalida();
-                }
-            });
-            this.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-    }
-
-    public void confirmarSalida() {
-        int dato = JOptionPane.showConfirmDialog(this, "Esta seguro de cerrar la aplicacion?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (dato == JOptionPane.YES_OPTION) {
-            System.exit(0);
-
-        } else {
-
-        }
-
-    }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -111,6 +87,9 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
         cliente = new javax.swing.JMenu();
         nuevocliente = new javax.swing.JMenuItem();
         editarcliente = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         salir = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         item1 = new javax.swing.JMenuItem();
@@ -186,7 +165,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
 
         editarempresa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         editarempresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/editar empresa.png"))); // NOI18N
-        editarempresa.setText("EDITAR EMPRESA");
+        editarempresa.setText("BUSCAR EMPRESA");
         editarempresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarempresaActionPerformed(evt);
@@ -268,6 +247,32 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
         cliente.add(editarcliente);
 
         jMenu3.add(cliente);
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/producto.png"))); // NOI18N
+        jMenu1.setText("PRODUCTOS");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        jMenuItem1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/addproducto.png"))); // NOI18N
+        jMenuItem1.setText("NUEVO PRODUCTO");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aditarproducto.png"))); // NOI18N
+        jMenuItem2.setText("EDITAR PRODUCTO");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenu3.add(jMenu1);
 
         salir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         salir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -445,13 +450,37 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ public void cerrar() {
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    confirmarSalida();
+                }
+            });
+            this.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+    }
+    
+    public void confirmarSalida() {
+        int dato = JOptionPane.showConfirmDialog(this, "Esta seguro de cerrar la aplicacion?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (dato == JOptionPane.YES_OPTION) {
+            System.exit(0);
+            
+        } else {
+            
+        }
+        
+    }
     private void item1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item1ActionPerformed
         try {
             UIManager.setLookAndFeel(new SyntheticaBlackEyeLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -462,7 +491,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaBlackMoonLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -473,7 +502,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaBlueIceLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -484,7 +513,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -495,7 +524,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -506,7 +535,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaGreenDreamLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -517,7 +546,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaMauveMetallicLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -528,7 +557,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaOrangeMetallicLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -539,7 +568,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaSilverMoonLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -550,7 +579,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaSimple2DLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -561,7 +590,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaSkyMetallicLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -573,7 +602,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             UIManager.setLookAndFeel(new SyntheticaWhiteVisionLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
-
+            
         }
         PrincipalView p = new PrincipalView(null, true, null);
         p.setVisible(true);
@@ -584,7 +613,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
         if (salir == JOptionPane.YES_OPTION) {
             System.exit(0);
         } else {
-
+            
         }
     }//GEN-LAST:event_salirActionPerformed
 
@@ -601,9 +630,12 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
     private void nuevoempleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoempleadoActionPerformed
 //        EmpleadoView ev = new EmpleadoView(null, true, null, null);
 //        ev.setVisible(true);
+        JOptionPane.showMessageDialog(this, "Seleccione la empresa ¡¡");
         BuscarEmpresaView bev = new BuscarEmpresaView(null, true);
+        bev.getBtneliminar().setVisible(false);
+        bev.getBtneditar().setVisible(false);
         bev.setVisible(true);
-
+        
 
     }//GEN-LAST:event_nuevoempleadoActionPerformed
 
@@ -631,6 +663,18 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
         bev.setVisible(true);
     }//GEN-LAST:event_editarempresaActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        ProductosView productosView = new ProductosView(null, true, null, null);
+        productosView.setVisible(true);
+        
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        BuscarProductoView bpv = new BuscarProductoView(null, true);
+        bpv.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Empresa;
     private javax.swing.JMenu User;
@@ -653,10 +697,13 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
     private javax.swing.JMenuItem item8;
     private javax.swing.JMenuItem item9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem nuevaempresa;
     private javax.swing.JMenuItem nuevocliente;
@@ -678,7 +725,7 @@ public class PrincipalView extends javax.swing.JDialog implements Runnable {
             }
         }
     }
-
+    
     private void calcula() {
         Calendar calendario = new GregorianCalendar();
         Date fechaHoraActual = new Date();

@@ -5,6 +5,7 @@
  */
 package sistemafacturacion;
 
+import com.alejandro.DAO.ProductoDao;
 import com.alejandro.views.LoginView;
 
 /**
@@ -20,5 +21,7 @@ public class SistemaFacturacion {
         LoginView lv = new LoginView(null, true, null);
         lv.setVisible(true);
 
+//        ProductoDao pd = new ProductoDao(null);
+//        pd.buscarTodos();
     }
 }

@@ -152,5 +152,6 @@ public class Empresa {
     }
 }
 /**
- * @return the empleado
+ * @return the facturas
+ *
  */
